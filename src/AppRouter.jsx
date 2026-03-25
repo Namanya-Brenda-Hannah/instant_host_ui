@@ -1,134 +1,136 @@
 /**
- * AppRouter.jsx – Application Routing
+ * AppRouter.jsx — Ostello Application Routing
  *
- * KEY CONCEPT – React Router v6
- * <Routes> renders only the first <Route> that matches the current URL.
- * <Navigate> performs an instant redirect.
- *
- * KEY CONCEPT – Protected Routes
- * Instead of repeating `token ? <Page> : <Navigate to="/login" />` on every
- * route we create a <ProtectedRoute> wrapper component.  It checks auth and
- * either renders its children or redirects, keeping route definitions clean.
- *
- * KEY CONCEPT – Decoding the JWT on the client
- * The JWT has 3 base64-encoded parts separated by dots: header.payload.signature
- * We can decode the middle part (payload) to read user info like username
- * without making an extra API call.  We do NOT verify the signature here
- * (that is the server's job); we just read the data.
+ * Decodes the JWT on the client to read { id, email, full_name, role }.
+ * ProtectedRoute enforces auth; RoleRoute enforces role access.
  */
-
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import ModernLayout from './layouts/ModernLayout';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
-import Chapters from './pages/Chapters';
+import HostelList from './pages/HostelList';
+import HostelDetail from './pages/HostelDetail';
+import MyBookings from './pages/MyBookings';
+import ManageHostels from './pages/ManageHostels';
+import BookingRequests from './pages/BookingRequests';
 import Users from './pages/Users';
-import Reports from './pages/Reports';
 
-// ── Helper: decode JWT payload ────────────────────────────────────────────────
-/**
- * Safely decode the payload section of a JWT without a library.
- * Returns the parsed object, or null if the token is missing / malformed.
- * @param {string} token
- * @returns {{ id: number, username: string, exp: number } | null}
- */
+// ── Decode JWT payload ────────────────────────────────────────────────────────
 function decodeToken(token) {
-  try {
-    if (!token) return null;
-    const payload = token.split('.')[1];                                   // grab the middle segment
-    const json = atob(payload.replaceAll('-', '+').replaceAll('_', '/')); // base64 → string
-    return JSON.parse(json);
-  } catch {
-    return null;
-  }
+    try {
+        if (!token) return null;
+        const payload = token.split('.')[1];
+        const json = atob(payload.replaceAll('-', '+').replaceAll('_', '/'));
+        return JSON.parse(json);
+    } catch {
+        return null;
+    }
 }
 
-// ── ProtectedRoute ─────────────────────────────────────────────────────────────
-/**
- * Renders children when a valid token exists; otherwise redirects to /login.
- */
+// ── Guards ────────────────────────────────────────────────────────────────────
 function ProtectedRoute({ token, children }) {
-  // Always return the same type (JSX element) from both branches
-  return token ? children : <Navigate to="/login" replace />;
+    return token ? children : <Navigate to="/login" replace />;
+}
+
+function RoleRoute({ user, roles, children }) {
+    if (!user) return <Navigate to="/login" replace />;
+    if (!roles.includes(user.role)) return <Navigate to="/dashboard" replace />;
+    return children;
+}
+
+// ── Wrap a page in the layout + auth guard ────────────────────────────────────
+function Page({ token, user, handleLogout, children }) {
+    return (
+        <ProtectedRoute token={token}>
+            <ModernLayout onLogout={handleLogout} user={user}>
+                {children}
+            </ModernLayout>
+        </ProtectedRoute>
+    );
 }
 
 // ── AppRouter ──────────────────────────────────────────────────────────────────
 export default function AppRouter() {
-  // Initialise token from localStorage so the user stays logged in on refresh
-  const [token, setToken] = useState(localStorage.getItem('token') || '');
+    const [token, setToken] = useState(localStorage.getItem('token') || '');
+    const user = decodeToken(token);
 
-  // Decode the payload so we can pass display info to the layout
-  const user = decodeToken(token);
+    const handleLogout = () => {
+        setToken('');
+        localStorage.removeItem('token');
+    };
 
-  const handleLogout = () => {
-    setToken('');
-    localStorage.removeItem('token');
-  };
+    return (
+        <Router>
+            <Routes>
+                {/* Public */}
+                <Route path="/login" element={<Login setToken={setToken} />} />
+                <Route path="/register" element={<Register />} />
 
-  return (
-    <Router>
-      <Routes>
-        {/* Public pages */}
-        <Route path="/login" element={<Login setToken={setToken} />} />
-        <Route path="/register" element={<Register />} />
+                {/* Root redirect */}
+                <Route path="/" element={<Navigate to={token ? '/dashboard' : '/login'} replace />} />
 
-        {/* Root redirect – send logged-in users to dashboard, others to login */}
-        <Route
-          path="/"
-          element={<Navigate to={token ? '/dashboard' : '/login'} replace />}
-        />
+                {/* Dashboard — all roles */}
+                <Route path="/dashboard" element={
+                    <Page token={token} user={user} handleLogout={handleLogout}>
+                        <Dashboard token={token} user={user} />
+                    </Page>
+                } />
 
-        {/* Protected pages – wrapped in ModernLayout */}
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute token={token}>
-              <ModernLayout onLogout={handleLogout} user={user}>
-                <Dashboard token={token} user={user} />
-              </ModernLayout>
-            </ProtectedRoute>
-          }
-        />
+                {/* Browse Hostels — STUDENT + ADMIN */}
+                <Route path="/hostels" element={
+                    <Page token={token} user={user} handleLogout={handleLogout}>
+                        <HostelList token={token} />
+                    </Page>
+                } />
 
-        <Route
-          path="/chapters"
-          element={
-            <ProtectedRoute token={token}>
-              <ModernLayout onLogout={handleLogout} user={user}>
-                <Chapters token={token} />
-              </ModernLayout>
-            </ProtectedRoute>
-          }
-        />
+                {/* Single Hostel — all authenticated */}
+                <Route path="/hostels/:id" element={
+                    <Page token={token} user={user} handleLogout={handleLogout}>
+                        <HostelDetail token={token} user={user} />
+                    </Page>
+                } />
 
-        <Route
-          path="/users"
-          element={
-            <ProtectedRoute token={token}>
-              <ModernLayout onLogout={handleLogout} user={user}>
-                <Users token={token} />
-              </ModernLayout>
-            </ProtectedRoute>
-          }
-        />
+                {/* My Bookings — STUDENT */}
+                <Route path="/my-bookings" element={
+                    <Page token={token} user={user} handleLogout={handleLogout}>
+                        <RoleRoute user={user} roles={['STUDENT']}>
+                            <MyBookings token={token} />
+                        </RoleRoute>
+                    </Page>
+                } />
 
-        <Route
-          path="/reports"
-          element={
-            <ProtectedRoute token={token}>
-              <ModernLayout onLogout={handleLogout} user={user}>
-                <Reports token={token} />
-              </ModernLayout>
-            </ProtectedRoute>
-          }
-        />
+                {/* Manage Hostels — CUSTODIAN */}
+                <Route path="/manage-hostels" element={
+                    <Page token={token} user={user} handleLogout={handleLogout}>
+                        <RoleRoute user={user} roles={['CUSTODIAN']}>
+                            <ManageHostels token={token} />
+                        </RoleRoute>
+                    </Page>
+                } />
 
-        {/* Catch-all – redirect unknown URLs to root */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Router>
-  );
+                {/* Booking Requests — CUSTODIAN */}
+                <Route path="/booking-requests" element={
+                    <Page token={token} user={user} handleLogout={handleLogout}>
+                        <RoleRoute user={user} roles={['CUSTODIAN']}>
+                            <BookingRequests token={token} />
+                        </RoleRoute>
+                    </Page>
+                } />
+
+                {/* Users — ADMIN */}
+                <Route path="/users" element={
+                    <Page token={token} user={user} handleLogout={handleLogout}>
+                        <RoleRoute user={user} roles={['ADMIN']}>
+                            <Users token={token} />
+                        </RoleRoute>
+                    </Page>
+                } />
+
+                {/* Catch-all */}
+                <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+        </Router>
+    );
 }
-

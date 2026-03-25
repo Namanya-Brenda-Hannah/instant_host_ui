@@ -4,39 +4,31 @@ import AppRouter from './AppRouter';
 import './index.css';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 
-/**
- * UCU BRAND THEME — Uganda Christian University
- *
- * Primary colour  → Maroon  (#7B1C1C) — used for sidebar, headers, primary buttons
- * Secondary colour → Gold   (#C9A227) — used for highlights, active states, accents
- * Background       → Warm cream (#F9F5F0) — softer than pure white, feels academic
- *
- * MUI's ThemeProvider applies these colours automatically to all MUI components,
- * so Button, AppBar, TextField focused outlines etc. all "just work" in UCU colours.
- */
-const ucuTheme = createTheme({
+const ostelloTheme = createTheme({
   palette: {
     primary: {
-      main: '#7B1C1C',   // UCU Maroon
-      dark: '#5C1010',   // darker maroon — hover / pressed states
-      light: '#9C2A2A',   // lighter maroon — outlined variants
-      contrastText: '#FFFFFF',   // white text on maroon backgrounds
+      main: '#0E7C6B',
+      dark: '#065C50',
+      light: '#12A18B',
+      contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#C9A227',   // UCU Gold
-      dark: '#A07D1C',   // darker gold
-      light: '#F5E6B0',   // very light gold — icon backgrounds, badges
-      contrastText: '#3D2B00',   // dark brown text on gold backgrounds
+      main: '#F2994A',
+      dark: '#D07A2D',
+      light: '#FDE8D0',
+      contrastText: '#3D2100',
     },
     background: {
-      default: '#F9F5F0',        // warm cream — page background
-      paper: '#FFFFFF',        // white — card / dialog surfaces
+      default: '#F5F7FA',
+      paper: '#FFFFFF',
     },
     error: { main: '#D32F2F' },
     success: { main: '#2E7D32' },
+    warning: { main: '#ED6C02' },
+    info: { main: '#0288D1' },
     text: {
-      primary: '#1A1A1A',
-      secondary: '#5A5A5A',
+      primary: '#1A1A2E',
+      secondary: '#636E82',
     },
   },
   typography: {
@@ -47,26 +39,24 @@ const ucuTheme = createTheme({
     subtitle1: { fontWeight: 600 },
   },
   shape: {
-    borderRadius: 10,            // slightly rounded — professional but not "playful"
+    borderRadius: 10,
   },
   components: {
-    // Make all contained buttons slightly bolder
     MuiButton: {
       styleOverrides: {
         containedPrimary: {
-          '&:hover': { backgroundColor: '#5C1010' },
+          '&:hover': { backgroundColor: '#065C50' },
         },
         containedSecondary: {
-          '&:hover': { backgroundColor: '#A07D1C' },
+          '&:hover': { backgroundColor: '#D07A2D' },
         },
       },
     },
-    // Focused TextField outline in UCU maroon
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#7B1C1C',
+            borderColor: '#0E7C6B',
           },
         },
       },
@@ -76,7 +66,7 @@ const ucuTheme = createTheme({
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider theme={ucuTheme}>
+    <ThemeProvider theme={ostelloTheme}>
       <CssBaseline />
       <AppRouter />
     </ThemeProvider>
