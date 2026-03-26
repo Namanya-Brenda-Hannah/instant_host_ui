@@ -4,18 +4,18 @@ import AppRouter from './AppRouter';
 import './index.css';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 
-const ostelloTheme = createTheme({
+const instantHostTheme = createTheme({
   palette: {
     primary: {
-      main: '#0E7C6B',
-      dark: '#065C50',
-      light: '#12A18B',
+      main: '#1B2A6B',
+      dark: '#111A4A',
+      light: '#2B3E9E',
       contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#F2994A',
-      dark: '#D07A2D',
-      light: '#FDE8D0',
+      main: '#F5A623',
+      dark: '#C47D0E',
+      light: '#FEF3D9',
       contrastText: '#3D2100',
     },
     background: {
@@ -45,10 +45,10 @@ const ostelloTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         containedPrimary: {
-          '&:hover': { backgroundColor: '#065C50' },
+          '&:hover': { backgroundColor: '#111A4A' },
         },
         containedSecondary: {
-          '&:hover': { backgroundColor: '#D07A2D' },
+          '&:hover': { backgroundColor: '#C47D0E' },
         },
       },
     },
@@ -56,7 +56,7 @@ const ostelloTheme = createTheme({
       styleOverrides: {
         root: {
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#0E7C6B',
+            borderColor: '#1B2A6B',
           },
         },
       },
@@ -66,7 +66,7 @@ const ostelloTheme = createTheme({
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider theme={ostelloTheme}>
+    <ThemeProvider theme={instantHostTheme}>
       <CssBaseline />
       <AppRouter />
     </ThemeProvider>

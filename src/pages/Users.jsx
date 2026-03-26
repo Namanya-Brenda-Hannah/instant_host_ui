@@ -1,5 +1,5 @@
 /**
- * pages/Users.jsx — Ostello Admin User Management
+ * pages/Users.jsx — INSTANT HOST Admin User Management
  */
 import { useEffect, useState } from 'react';
 import { getUsers, updateUser, deleteUser } from '../utils/api';

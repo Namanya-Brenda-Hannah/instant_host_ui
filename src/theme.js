@@ -1,15 +1,16 @@
 /**
- * theme.js — Ostello global brand tokens
+ * theme.js — INSTANT HOST global brand tokens
+ * Uganda Christian University (UCU) student project
  *
  * Import from here instead of re-declaring in every file:
  *   import { BRAND, STATUS_COLORS, ROLE_COLORS } from '../theme';
  */
 
 export const BRAND = {
-    teal: '#0E7C6B',
-    tealDark: '#065C50',
-    orange: '#F2994A',
-    orangeLight: '#FDE8D0',
+    navy: '#1B2A6B',
+    navyDark: '#111A4A',
+    gold: '#F5A623',
+    goldLight: '#FEF3D9',
     white: '#FFFFFF',
     offWhite: '#F5F7FA',
 };
@@ -30,8 +31,8 @@ export const ROLE_COLORS = {
 
 /** Cycle through a set of card header gradients by index */
 export const CARD_GRADIENTS = [
-    `linear-gradient(135deg, ${BRAND.teal} 0%, #0A9B84 100%)`,
-    `linear-gradient(135deg, #1A4A7B 0%, #2563A8 100%)`,
+    `linear-gradient(135deg, ${BRAND.navy} 0%, #243480 100%)`,
+    `linear-gradient(135deg, #2B5EA7 0%, #3A7BC8 100%)`,
     `linear-gradient(135deg, #6D28D9 0%, #7C3AED 100%)`,
     `linear-gradient(135deg, #B45309 0%, #D97706 100%)`,
 ];

@@ -1,5 +1,5 @@
 /**
- * pages/Register.jsx - Ostello Registration Page
+ * pages/Register.jsx - INSTANT HOST Registration Page
  */
 import { useState } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
@@ -14,10 +14,10 @@ import { useToast } from '../hooks/useToast';
 import Toast from '../components/Toast';
 
 const BRAND = {
-  teal: '#0E7C6B',
-  tealDark: '#065C50',
-  orange: '#F2994A',
-  orangeLight: '#FDE8D0',
+  navy: '#1B2A6B',
+  navyDark: '#111A4A',
+  gold: '#F5A623',
+  goldLight: '#FEF3D9',
   white: '#FFFFFF',
 };
 
@@ -57,14 +57,14 @@ export default function Register() {
       <Box sx={{
         display: { xs: 'none', md: 'flex' },
         flex: '0 0 45%',
-        background: `linear-gradient(160deg, ${BRAND.teal} 0%, ${BRAND.tealDark} 100%)`,
+        background: `linear-gradient(160deg, ${BRAND.navy} 0%, ${BRAND.navyDark} 100%)`,
         px: 6, py: 8,
         alignItems: 'center',
         justifyContent: 'center',
       }}>
         <Box sx={{ textAlign: 'center', color: BRAND.white }}>
           <ApartmentIcon sx={{ fontSize: 72, color: BRAND.white }} />
-          <Typography variant="h4" fontWeight={800} mt={2}>Ostello</Typography>
+          <Typography variant="h4" fontWeight={800} mt={2}>INSTANT HOST</Typography>
           <Typography variant="body1" mt={1} sx={{ color: 'rgba(255,255,255,0.85)' }}>
             Discover hostels near you. Book with confidence.
           </Typography>
@@ -75,11 +75,11 @@ export default function Register() {
       <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: '#FAFAFA', px: { xs: 3, sm: 6, md: 8 } }}>
         <Box sx={{ width: '100%', maxWidth: 520 }}>
           <Stack direction="row" spacing={1.5} alignItems="center" mb={1}>
-            <Box sx={{ p: 1, bgcolor: BRAND.orangeLight, borderRadius: 2 }}>
-              <LockOpenIcon sx={{ color: BRAND.teal }} />
+            <Box sx={{ p: 1, bgcolor: BRAND.goldLight, borderRadius: 2 }}>
+              <LockOpenIcon sx={{ color: BRAND.navy }} />
             </Box>
             <Box>
-              <Typography variant="h5" fontWeight={800} color={BRAND.teal}>Create Account</Typography>
+              <Typography variant="h5" fontWeight={800} color={BRAND.navy}>Create Account</Typography>
               <Typography variant="body2" color="text.secondary">Sign up and start discovering hostels</Typography>
             </Box>
           </Stack>
@@ -103,7 +103,7 @@ export default function Register() {
 
             <Button
               type="submit" variant="contained" fullWidth disabled={loading}
-              sx={{ mt: 2, py: 1.4, fontWeight: 700, bgcolor: BRAND.teal, '&:hover': { bgcolor: BRAND.tealDark }, borderRadius: 2 }}
+              sx={{ mt: 2, py: 1.4, fontWeight: 700, bgcolor: BRAND.navy, '&:hover': { bgcolor: BRAND.navyDark }, borderRadius: 2 }}
             >
               {loading ? <CircularProgress size={20} sx={{ color: '#fff' }} /> : 'Create Account'}
             </Button>
@@ -111,7 +111,7 @@ export default function Register() {
 
           <Typography variant="body2" textAlign="center" mt={3} color="text.secondary">
             {'Already have an account? '}
-            <Link component={RouterLink} to="/login" sx={{ color: BRAND.teal, fontWeight: 700 }}>Sign in</Link>
+            <Link component={RouterLink} to="/login" sx={{ color: BRAND.navy, fontWeight: 700 }}>Sign in</Link>
           </Typography>
         </Box>
       </Box>

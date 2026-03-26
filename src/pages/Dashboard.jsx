@@ -1,5 +1,5 @@
 /**
- * pages/Dashboard.jsx — Ostello Role-Based Dashboard
+ * pages/Dashboard.jsx — INSTANT HOST Role-Based Dashboard
  *
  * STUDENT   → My recent bookings, quick search link
  * CUSTODIAN → Hostel stats, recent booking requests
@@ -25,10 +25,10 @@ import {
 } from '../utils/api';
 
 const BRAND = {
-    teal: '#0E7C6B',
-    tealDark: '#065C50',
-    orange: '#F2994A',
-    orangeLight: '#FDE8D0',
+    navy: '#1B2A6B',
+    navyDark: '#111A4A',
+    gold: '#F5A623',
+    goldLight: '#FEF3D9',
 };
 
 const STATUS_COLORS = {
@@ -86,7 +86,7 @@ export default function Dashboard({ token, user }) {
         if (role === 'STUDENT') {
             const bookings = data.bookings ?? [];
             return [
-                { label: 'Total Bookings', value: bookings.length, icon: <BookOnlineIcon sx={{ fontSize: 32 }} />, accent: BRAND.teal, lightBg: '#E6F4F1', link: '/my-bookings' },
+                { label: 'Total Bookings', value: bookings.length, icon: <BookOnlineIcon sx={{ fontSize: 32 }} />, accent: BRAND.navy, lightBg: '#E8EAF6', link: '/my-bookings' },
                 { label: 'Pending', value: bookings.filter(b => b.status === 'PENDING').length, icon: <TrendingUpIcon sx={{ fontSize: 32 }} />, accent: '#ED6C02', lightBg: '#FFF3E0', link: '/my-bookings' },
                 { label: 'Approved', value: bookings.filter(b => b.status === 'APPROVED').length, icon: <StarIcon sx={{ fontSize: 32 }} />, accent: '#0288D1', lightBg: '#E3F2FD', link: '/my-bookings' },
                 { label: 'Completed', value: bookings.filter(b => b.status === 'COMPLETED').length, icon: <MeetingRoomIcon sx={{ fontSize: 32 }} />, accent: '#2E7D32', lightBg: '#E8F5E9', link: '/my-bookings' },
@@ -95,7 +95,7 @@ export default function Dashboard({ token, user }) {
         if (role === 'CUSTODIAN') {
             const stats = data.stats ?? {};
             return [
-                { label: 'My Hostels', value: data.hostels?.length ?? 0, icon: <ApartmentIcon sx={{ fontSize: 32 }} />, accent: BRAND.teal, lightBg: '#E6F4F1', link: '/manage-hostels' },
+                { label: 'My Hostels', value: data.hostels?.length ?? 0, icon: <ApartmentIcon sx={{ fontSize: 32 }} />, accent: BRAND.navy, lightBg: '#E8EAF6', link: '/manage-hostels' },
                 { label: 'Total Rooms', value: stats.total_rooms ?? 0, icon: <MeetingRoomIcon sx={{ fontSize: 32 }} />, accent: '#1A4A7B', lightBg: '#EEF4FB', link: '/manage-hostels' },
                 { label: 'Active Bookings', value: stats.active_bookings ?? 0, icon: <BookOnlineIcon sx={{ fontSize: 32 }} />, accent: '#7B5200', lightBg: '#FDF7EC', link: '/booking-requests' },
                 { label: 'Pending Requests', value: data.requests?.length ?? 0, icon: <TrendingUpIcon sx={{ fontSize: 32 }} />, accent: '#ED6C02', lightBg: '#FFF3E0', link: '/booking-requests' },
@@ -103,7 +103,7 @@ export default function Dashboard({ token, user }) {
         }
         // ADMIN
         return [
-            { label: 'Total Hostels', value: data.hostelCount ?? 0, icon: <ApartmentIcon sx={{ fontSize: 32 }} />, accent: BRAND.teal, lightBg: '#E6F4F1', link: '/hostels' },
+            { label: 'Total Hostels', value: data.hostelCount ?? 0, icon: <ApartmentIcon sx={{ fontSize: 32 }} />, accent: BRAND.navy, lightBg: '#E8EAF6', link: '/hostels' },
             { label: 'Registered Users', value: data.userCount ?? 0, icon: <PeopleIcon sx={{ fontSize: 32 }} />, accent: '#1A4A7B', lightBg: '#EEF4FB', link: '/users' },
         ];
     };
@@ -117,18 +117,18 @@ export default function Dashboard({ token, user }) {
             <Box
                 sx={{
                     mb: 3.5, borderRadius: 4, overflow: 'hidden', position: 'relative',
-                    background: `linear-gradient(135deg, ${BRAND.teal} 0%, #0A9B84 50%, ${BRAND.tealDark} 100%)`,
+                    background: `linear-gradient(135deg, ${BRAND.navy} 0%, #243480 50%, ${BRAND.navyDark} 100%)`,
                     p: { xs: 3, md: 4 },
                     boxShadow: '0 8px 32px rgba(14,124,107,0.35)',
                 }}
             >
                 <Box sx={{ position: 'absolute', inset: 0, opacity: 0.04, backgroundImage: 'radial-gradient(circle at 20px 20px, white 2px, transparent 0)', backgroundSize: '40px 40px' }} />
-                <Box sx={{ position: 'absolute', top: -60, right: -60, width: 220, height: 220, borderRadius: '50%', bgcolor: 'rgba(242,153,74,0.2)', filter: 'blur(40px)' }} />
+                <Box sx={{ position: 'absolute', top: -60, right: -60, width: 220, height: 220, borderRadius: '50%', bgcolor: 'rgba(245,166,35,0.2)', filter: 'blur(40px)' }} />
 
                 <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems={{ sm: 'center' }} spacing={2} sx={{ position: 'relative', zIndex: 1 }}>
                     <Box>
-                        <Typography variant="caption" sx={{ color: BRAND.orange, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', fontSize: 11 }}>
-                            Ostello — {role === 'CUSTODIAN' ? 'Custodian Portal' : role === 'ADMIN' ? 'Admin Portal' : 'Student Portal'}
+                        <Typography variant="caption" sx={{ color: BRAND.gold, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', fontSize: 11 }}>
+                            INSTANT HOST — {role === 'CUSTODIAN' ? 'Custodian Portal' : role === 'ADMIN' ? 'Admin Portal' : 'Student Portal'}
                         </Typography>
                         <Typography variant="h4" fontWeight={900} color="#fff" sx={{ mt: 0.5, lineHeight: 1.2 }}>
                             {greeting}, {firstName}! 👋
@@ -142,13 +142,13 @@ export default function Dashboard({ token, user }) {
                     <Stack direction="row" spacing={1.5} flexShrink={0}>
                         {role === 'STUDENT' && (
                             <Button variant="contained" startIcon={<SearchIcon />} onClick={() => navigate('/hostels')}
-                                sx={{ bgcolor: BRAND.orange, color: '#3D2100', fontWeight: 800, borderRadius: 2.5, px: 2.5, '&:hover': { bgcolor: '#E8A84A' }, boxShadow: '0 4px 14px rgba(242,153,74,0.4)' }}>
+                                sx={{ bgcolor: BRAND.gold, color: '#3D2100', fontWeight: 800, borderRadius: 2.5, px: 2.5, '&:hover': { bgcolor: '#C47D0E' }, boxShadow: '0 4px 14px rgba(245,166,35,0.4)' }}>
                                 Browse Hostels
                             </Button>
                         )}
                         {role === 'CUSTODIAN' && (
                             <Button variant="contained" startIcon={<ApartmentIcon />} onClick={() => navigate('/manage-hostels')}
-                                sx={{ bgcolor: BRAND.orange, color: '#3D2100', fontWeight: 800, borderRadius: 2.5, px: 2.5, '&:hover': { bgcolor: '#E8A84A' }, boxShadow: '0 4px 14px rgba(242,153,74,0.4)' }}>
+                                sx={{ bgcolor: BRAND.gold, color: '#3D2100', fontWeight: 800, borderRadius: 2.5, px: 2.5, '&:hover': { bgcolor: '#C47D0E' }, boxShadow: '0 4px 14px rgba(245,166,35,0.4)' }}>
                                 Manage Hostels
                             </Button>
                         )}
@@ -159,7 +159,7 @@ export default function Dashboard({ token, user }) {
             {/* Loading */}
             {loading && (
                 <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
-                    <CircularProgress sx={{ color: BRAND.teal }} />
+                    <CircularProgress sx={{ color: BRAND.navy }} />
                 </Box>
             )}
 
@@ -214,7 +214,7 @@ export default function Dashboard({ token, user }) {
                             <Typography variant="subtitle2" fontWeight={800}>Recent Bookings</Typography>
                             <Typography variant="caption" color="text.disabled">Your latest hostel reservations</Typography>
                         </Box>
-                        <Button size="small" endIcon={<ArrowForwardIcon sx={{ fontSize: 13 }} />} onClick={() => navigate('/my-bookings')} sx={{ color: BRAND.teal, fontWeight: 700, fontSize: 12 }}>
+                        <Button size="small" endIcon={<ArrowForwardIcon sx={{ fontSize: 13 }} />} onClick={() => navigate('/my-bookings')} sx={{ color: BRAND.navy, fontWeight: 700, fontSize: 12 }}>
                             View all
                         </Button>
                     </Stack>
@@ -222,7 +222,7 @@ export default function Dashboard({ token, user }) {
                         {data.bookings.slice(0, 5).map((b, idx) => (
                             <Stack key={b.id} direction="row" alignItems="center" spacing={2}
                                 sx={{ px: 3, py: 1.8, borderBottom: idx < Math.min(data.bookings.length, 5) - 1 ? '1px solid rgba(0,0,0,0.04)' : 'none', transition: '0.15s', '&:hover': { bgcolor: 'rgba(0,0,0,0.02)' } }}>
-                                <Avatar sx={{ bgcolor: '#E6F4F1', color: BRAND.teal, width: 38, height: 38 }}>
+                                <Avatar sx={{ bgcolor: '#E8EAF6', color: BRAND.navy, width: 38, height: 38 }}>
                                     <ApartmentIcon sx={{ fontSize: 18 }} />
                                 </Avatar>
                                 <Box flex={1} minWidth={0}>
@@ -244,7 +244,7 @@ export default function Dashboard({ token, user }) {
                             <Typography variant="subtitle2" fontWeight={800}>Pending Booking Requests</Typography>
                             <Typography variant="caption" color="text.disabled">Requests awaiting your approval</Typography>
                         </Box>
-                        <Button size="small" endIcon={<ArrowForwardIcon sx={{ fontSize: 13 }} />} onClick={() => navigate('/booking-requests')} sx={{ color: BRAND.teal, fontWeight: 700, fontSize: 12 }}>
+                        <Button size="small" endIcon={<ArrowForwardIcon sx={{ fontSize: 13 }} />} onClick={() => navigate('/booking-requests')} sx={{ color: BRAND.navy, fontWeight: 700, fontSize: 12 }}>
                             View all
                         </Button>
                     </Stack>

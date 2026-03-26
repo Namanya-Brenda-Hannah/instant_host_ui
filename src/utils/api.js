@@ -1,5 +1,5 @@
 /**
- * utils/api.js – Centralised API Client (Ostello)
+ * utils/api.js – Centralised API Client (INSTANT HOST)
  * ─────────────────────────────────────────────────────────────────────────────
  * ALL backend communication lives in this one file.
  * Pages import the specific functions they need:
@@ -31,7 +31,7 @@
 
 // The base URL for all API calls.
 // Change this string if your backend runs on a different host or port.
-// In production this would be something like 'https://api.ostello.com'.
+// In production this would be something like 'https://api.instanthost.com'.
 const API_BASE = 'http://localhost:3000/api';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────

@@ -1,5 +1,5 @@
 /**
- * AppRouter.jsx — Ostello Application Routing
+ * AppRouter.jsx — INSTANT HOST Application Routing
  *
  * Decodes the JWT on the client to read { id, email, full_name, role }.
  * ProtectedRoute enforces auth; RoleRoute enforces role access.
@@ -20,7 +20,7 @@ import ManageHostels from './pages/ManageHostels';
 import BookingRequests from './pages/BookingRequests';
 import Users from './pages/Users';
 
-const BRAND = { teal: '#0E7C6B', orange: '#F2994A', orangeLight: '#FDE8D0' };
+const BRAND = { navy: '#1B2A6B', gold: '#F5A623', goldLight: '#FEF3D9' };
 
 // ── 404 Not Found ─────────────────────────────────────────────────────────────
 function NotFound() {
@@ -29,11 +29,11 @@ function NotFound() {
         <Box sx={{
             minHeight: '100vh', display: 'flex', flexDirection: 'column',
             alignItems: 'center', justifyContent: 'center',
-            background: 'linear-gradient(135deg, #F5F7FA 0%, #E8F5F2 100%)',
+            background: 'linear-gradient(135deg, #F5F7FA 0%, #E8EAF6 100%)',
             px: 3, textAlign: 'center',
         }}>
-            <SentimentDissatisfiedIcon sx={{ fontSize: 90, color: BRAND.teal, opacity: 0.35, mb: 2 }} />
-            <Typography variant="h1" fontWeight={900} sx={{ fontSize: { xs: 80, md: 120 }, color: BRAND.teal, lineHeight: 1, mb: 1 }}>
+            <SentimentDissatisfiedIcon sx={{ fontSize: 90, color: BRAND.navy, opacity: 0.35, mb: 2 }} />
+            <Typography variant="h1" fontWeight={900} sx={{ fontSize: { xs: 80, md: 120 }, color: BRAND.navy, lineHeight: 1, mb: 1 }}>
                 404
             </Typography>
             <Typography variant="h5" fontWeight={700} color="text.primary" mb={1}>
@@ -44,11 +44,11 @@ function NotFound() {
             </Typography>
             <Stack direction="row" spacing={2}>
                 <Button variant="contained" startIcon={<HomeIcon />} onClick={() => navigate('/')}
-                    sx={{ bgcolor: BRAND.teal, fontWeight: 700, borderRadius: 2.5, px: 3, '&:hover': { bgcolor: '#065C50' } }}>
+                    sx={{ bgcolor: BRAND.navy, fontWeight: 700, borderRadius: 2.5, px: 3, '&:hover': { bgcolor: '#111A4A' } }}>
                     Go Home
                 </Button>
                 <Button variant="outlined" onClick={() => navigate(-1)}
-                    sx={{ borderColor: BRAND.teal, color: BRAND.teal, fontWeight: 700, borderRadius: 2.5, px: 3 }}>
+                    sx={{ borderColor: BRAND.navy, color: BRAND.navy, fontWeight: 700, borderRadius: 2.5, px: 3 }}>
                     Go Back
                 </Button>
             </Stack>

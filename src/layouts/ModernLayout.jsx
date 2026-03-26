@@ -1,5 +1,5 @@
 /**
- * layouts/ModernLayout.jsx — Ostello App Shell
+ * layouts/ModernLayout.jsx — INSTANT HOST App Shell
  *
  * Role-based navigation:
  *   STUDENT   → Dashboard, Browse Hostels, My Bookings
@@ -26,10 +26,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 const DRAWER_WIDTH = 240;
 
 const BRAND = {
-    teal: '#0E7C6B',
-    tealDark: '#065C50',
-    orange: '#F2994A',
-    orangeLight: '#FDE8D0',
+    navy: '#1B2A6B',
+    navyDark: '#111A4A',
+    gold: '#F5A623',
+    goldLight: '#FEF3D9',
     white: '#FFFFFF',
     offWhite: '#F5F7FA',
 };
@@ -62,7 +62,7 @@ const PAGE_LABELS = {
     '/users': 'Users',
 };
 
-const AVATAR_COLORS = [BRAND.teal, '#7B3F00', '#1A4A7B', '#1A5C2E', '#4A1A7B'];
+const AVATAR_COLORS = [BRAND.navy, '#7B3F00', '#1A4A7B', '#1A5C2E', '#4A1A7B'];
 const avatarBg = (name = '') =>
     AVATAR_COLORS[(name.codePointAt(0) ?? 0) % AVATAR_COLORS.length];
 
@@ -91,19 +91,19 @@ export default function ModernLayout({ children, user }) {
     };
 
     const drawerContent = (
-        <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', bgcolor: BRAND.teal, color: BRAND.white }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', bgcolor: BRAND.navy, color: BRAND.white }}>
 
             {/* Branding header */}
             <Box sx={{ px: 2.5, pt: 3, pb: 2 }}>
                 <Stack direction="row" alignItems="center" spacing={1.5}>
                     <Box sx={{ width: 42, height: 42, borderRadius: '50%', bgcolor: BRAND.white, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 2px 8px rgba(0,0,0,0.25)' }}>
-                        <ApartmentIcon sx={{ fontSize: 26, color: BRAND.teal }} />
+                        <ApartmentIcon sx={{ fontSize: 26, color: BRAND.navy }} />
                     </Box>
                     <Box>
                         <Typography variant="subtitle1" sx={{ color: BRAND.white, fontWeight: 800, lineHeight: 1.1, letterSpacing: 0.5 }}>
-                            Ostello
+                            INSTANT HOST
                         </Typography>
-                        <Typography variant="caption" sx={{ color: BRAND.orangeLight, fontSize: 9, letterSpacing: 0.6, lineHeight: 1, display: 'block' }}>
+                        <Typography variant="caption" sx={{ color: BRAND.goldLight, fontSize: 9, letterSpacing: 0.6, lineHeight: 1, display: 'block' }}>
                             HOSTEL DISCOVERY &amp; BOOKING
                         </Typography>
                     </Box>
@@ -122,9 +122,9 @@ export default function ModernLayout({ children, user }) {
                             onClick={() => navClick(path)}
                             sx={{
                                 borderRadius: 2, mb: 0.5, px: 1.5, py: 1.1,
-                                color: active ? BRAND.orange : 'rgba(255,255,255,0.78)',
-                                bgcolor: active ? 'rgba(242,153,74,0.18)' : 'transparent',
-                                borderLeft: active ? `3px solid ${BRAND.orange}` : '3px solid transparent',
+                                color: active ? BRAND.gold : 'rgba(255,255,255,0.78)',
+                                bgcolor: active ? 'rgba(245,166,35,0.18)' : 'transparent',
+                                borderLeft: active ? `3px solid ${BRAND.gold}` : '3px solid transparent',
                                 '&:hover': { bgcolor: 'rgba(255,255,255,0.09)', color: BRAND.white },
                                 transition: 'all 0.15s ease',
                             }}
@@ -143,7 +143,7 @@ export default function ModernLayout({ children, user }) {
             {/* User + logout */}
             <Box sx={{ px: 2, py: 2 }}>
                 <Stack direction="row" alignItems="center" spacing={1.5}>
-                    <Avatar sx={{ width: 36, height: 36, bgcolor: avatarBg(displayName), border: `2px solid ${BRAND.orange}`, fontWeight: 700, fontSize: 15 }}>
+                    <Avatar sx={{ width: 36, height: 36, bgcolor: avatarBg(displayName), border: `2px solid ${BRAND.gold}`, fontWeight: 700, fontSize: 15 }}>
                         {displayName[0]?.toUpperCase()}
                     </Avatar>
                     <Box sx={{ flexGrow: 1, overflow: 'hidden' }}>
@@ -155,7 +155,7 @@ export default function ModernLayout({ children, user }) {
                         </Typography>
                     </Box>
                     <Tooltip title="Logout">
-                        <IconButton size="small" onClick={handleLogout} sx={{ color: 'rgba(255,255,255,0.6)', '&:hover': { color: BRAND.orange } }}>
+                        <IconButton size="small" onClick={handleLogout} sx={{ color: 'rgba(255,255,255,0.6)', '&:hover': { color: BRAND.gold } }}>
                             <LogoutIcon fontSize="small" />
                         </IconButton>
                     </Tooltip>
@@ -201,7 +201,7 @@ export default function ModernLayout({ children, user }) {
                     elevation={0}
                     sx={{
                         bgcolor: BRAND.white,
-                        borderBottom: `3px solid ${BRAND.teal}`,
+                        borderBottom: `3px solid ${BRAND.navy}`,
                         color: 'text.primary',
                         zIndex: (t) => t.zIndex.drawer - 1,
                     }}
@@ -211,30 +211,30 @@ export default function ModernLayout({ children, user }) {
                         <IconButton
                             edge="start"
                             onClick={() => setMobileOpen(true)}
-                            sx={{ display: { xs: 'flex', md: 'none' }, color: BRAND.teal, mr: 0.5 }}
+                            sx={{ display: { xs: 'flex', md: 'none' }, color: BRAND.navy, mr: 0.5 }}
                         >
                             <MenuIcon />
                         </IconButton>
 
                         <Breadcrumbs
-                            separator={<NavigateNextIcon fontSize="small" sx={{ color: BRAND.teal }} />}
+                            separator={<NavigateNextIcon fontSize="small" sx={{ color: BRAND.navy }} />}
                             sx={{ flexGrow: 1 }}
                         >
                             <Link
                                 underline="hover"
                                 onClick={() => navigate('/dashboard')}
-                                sx={{ cursor: 'pointer', fontSize: 13, color: BRAND.teal, fontWeight: 600 }}
+                                sx={{ cursor: 'pointer', fontSize: 13, color: BRAND.navy, fontWeight: 600 }}
                             >
                                 Home
                             </Link>
-                            <Typography sx={{ fontSize: 13, fontWeight: 700, color: BRAND.teal }}>{pageLabel}</Typography>
+                            <Typography sx={{ fontSize: 13, fontWeight: 700, color: BRAND.navy }}>{pageLabel}</Typography>
                         </Breadcrumbs>
 
                         {/* Role badge */}
                         <Chip
                             label={ROLE_LABELS[role] ?? role}
                             size="small"
-                            sx={{ bgcolor: BRAND.orangeLight, color: BRAND.teal, fontWeight: 700, fontSize: 11, display: { xs: 'none', sm: 'flex' } }}
+                            sx={{ bgcolor: BRAND.goldLight, color: BRAND.navy, fontWeight: 700, fontSize: 11, display: { xs: 'none', sm: 'flex' } }}
                         />
 
                         {/* User chip */}
@@ -247,7 +247,7 @@ export default function ModernLayout({ children, user }) {
                             label={displayName}
                             size="small"
                             variant="outlined"
-                            sx={{ borderColor: BRAND.teal, color: BRAND.teal, fontWeight: 600, fontSize: 12 }}
+                            sx={{ borderColor: BRAND.navy, color: BRAND.navy, fontWeight: 600, fontSize: 12 }}
                         />
                     </Toolbar>
                 </AppBar>
@@ -260,10 +260,10 @@ export default function ModernLayout({ children, user }) {
                 {/* Footer */}
                 <Box sx={{
                     textAlign: 'center', py: 1.5,
-                    borderTop: '1px solid rgba(14,124,107,0.1)',
-                    color: BRAND.teal, fontSize: 11, fontWeight: 500, opacity: 0.65,
+                    borderTop: '1px solid rgba(27,42,107,0.1)',
+                    color: BRAND.navy, fontSize: 11, fontWeight: 500, opacity: 0.65,
                 }}>
-                    © {new Date().getFullYear()} Ostello — Hostel Discovery &amp; Booking Platform
+                    © {new Date().getFullYear()} INSTANT HOST — Uganda Christian University · Hostel Discovery &amp; Booking Platform
                 </Box>
             </Box>
         </Box>

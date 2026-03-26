@@ -1,9 +1,9 @@
-# Ostello UI — Hostel Discovery & Booking Frontend
+# INSTANT HOST UI — Hostel Discovery & Booking Frontend
 
 > **Learning Project** — A React 19 + Vite 6 single-page application that
-> talks to the Ostello REST API. Built by MUSASIZI KENNETH to help students
-> understand how modern frontend applications are structured and how they
-> communicate with a backend API.
+> talks to the INSTANT HOST REST API. Built by MUSASIZI KENNETH to help students
+> at **Uganda Christian University (UCU)** understand how modern frontend
+> applications are structured and how they communicate with a backend API.
 
 ---
 
@@ -27,7 +27,7 @@
 
 ## What is This App?
 
-Ostello UI is the student-facing web application for the Ostello hostel
+INSTANT HOST UI is the student-facing web application for the INSTANT HOST hostel
 platform. Depending on the logged-in user's role it shows different pages:
 
 - **Students** browse hostels, view rooms, make bookings, pay, and leave reviews.
@@ -67,7 +67,7 @@ platform. Depending on the logged-in user's role it shows different pages:
 ## Project Structure
 
 ```
-ostello_ui/
+instant_host_ui/
 │
 ├── index.html              ← Single HTML page — React mounts into <div id="root">
 ├── vite.config.js          ← Vite build configuration
@@ -114,7 +114,7 @@ ostello_ui/
 |------|----------------|-------|
 | **Node.js** | v18 | https://nodejs.org |
 | **npm** | v9 | Comes with Node.js |
-| **ostello_api** running | — | The UI is useless without the backend |
+| **instant_host_api** running | — | The UI is useless without the backend |
 
 Check your versions:
 
@@ -134,7 +134,7 @@ npm --version    # 9.x.x or higher
 ### Step 1 — Start the backend (in a separate terminal)
 
 ```bash
-cd ostello_api
+cd instant_host_api
 npm start        # starts the Express server on http://localhost:3000
 ```
 
@@ -143,7 +143,7 @@ npm start        # starts the Express server on http://localhost:3000
 Open a **new terminal** tab and run:
 
 ```bash
-cd ostello_ui
+cd instant_host_ui
 npm install
 ```
 
@@ -171,8 +171,8 @@ Log in with any of the seeded accounts (password is `password123` for all):
 | Email | Role |
 |-------|------|
 | `alice@student.com` | Student |
-| `john@ostello.com` | Custodian |
-| `admin@ostello.com` | Admin |
+| `john@instanthost.com` | Custodian |
+| `admin@instanthost.com` | Admin |
 
 ---
 
@@ -180,10 +180,10 @@ Log in with any of the seeded accounts (password is `password123` for all):
 
 By default the app calls the API at `http://localhost:3000`. If you need to
 point it at a different host (e.g. a deployed server), create a file named
-`.env` in the `ostello_ui/` directory:
+`.env` in the `instant_host_ui/` directory:
 
 ```dotenv
-# The base URL of your Ostello API server
+# The base URL of your INSTANT HOST API server
 VITE_API_BASE_URL=http://localhost:3000
 ```
 
